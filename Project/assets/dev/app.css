@@ -126,7 +126,7 @@ header #main_nav #hamburguer_nav span {
 }
 
 header #main_nav #hamburguer_nav .hamburguer {
-  background: url("./assets/shared/icon-hamburger.svg") no-repeat;
+  background: url("/assets/shared/icon-hamburger.svg") no-repeat;
   width: 24px;
   height: 21px;
   transition: 0.3s ease-in-out;
@@ -164,7 +164,7 @@ header #main_nav #hamburguer_nav #hamburguer_toggle:checked ~ .hamburguer {
   position: absolute;
   left: -30%;
   top: -200%;
-  background: url("./assets/shared/icon-close.svg") no-repeat;
+  background: url("/assets/shared/icon-close.svg") no-repeat;
   z-index: 3;
 }
 
