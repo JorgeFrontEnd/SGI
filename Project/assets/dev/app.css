@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Silkscreen:wght@400;700&display=swap');
+
+:root{
+  --red:#e02948;
+  --white:#ffff;
+  --black: #13151b;
+  --gray: #f6f7f9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.product-page {
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 2fr 8fr 2fr;
+  grid-template-rows: 60px 60px;
+  padding: 2% 10% 0 10%;
+  justify-items: center;
+  align-items: center;
+}
+
+header .logo {
+  grid-column-start: 1;
+  height: 100%;
+}
+
+header .logo img{
+  width: 120px;
+}
+
+header .search {
+  position: relative;
+  width: 100%;
+  grid-column-start: 2;
+  grid-row-start: 1;
+  justify-self: start;
+  height: 100%;
+}
+
+header .search img {
+  position: absolute;
+  left: 20px;
+  top: calc(50% - 12.5px);
+}
+
+header .search input {
+  width: inherit;
+  border-radius: 32px;
+  border: none;
+  background-color: var(--gray);
+  padding: 9px;
+  height: inherit;
+}
+
+header .search input::placeholder {
+  position: absolute;
+  left: 50px;
+}
+
+header .user {
+  position: relative;
+  grid-column-start: 3;
+  grid-row-start: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header .user button {
+  border: none;
+  background-color: var(--white);
+}
+
+header #main_nav {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  justify-self: start;
+}
+
+header ul a{
+  text-decoration: none;
+  color: var(--black);
+}
+header #main_nav #hamburguer_nav {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0;
+  color: var(--white);
+  background-color: var(--black);
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+header #main_nav #hamburguer_nav #hamburguer_toggle {
+  display: none;
+}
+
+header #main_nav #hamburguer_nav label {
+  position: relative;
+  color: var(--white);
+  cursor: inherit;
+}
+
+header #main_nav #hamburguer_nav span {
+  margin-left: 10px;
+}
+
+header #main_nav #hamburguer_nav .hamburguer {
+  background: url("/assets/shared/icon-hamburger.svg") no-repeat;
+  width: 24px;
+  height: 21px;
+  transition: 0.3s ease-in-out;
+  z-index: 2;
+}
+
+header #main_nav #hamburguer_nav ul {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  font-family: "Poppins";
+  background-color: var(--white);
+  opacity: 0;
+  padding: 50px 0 50px 0;
+  width: 25%;
+  height: 100%;
+  z-index: 0;
+  overflow-y: scroll;
+}
+
+header #main_nav #hamburguer_nav ul li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 0 0 4rem;
+}
+
+header #main_nav #hamburguer_nav #hamburguer_toggle:checked~ul {
+  display: block;
+  opacity: 1;
+}
+
+header #main_nav #hamburguer_nav #hamburguer_toggle:checked ~ .hamburguer {
+  position: absolute;
+  left: -30%;
+  top: -200%;
+  background: url("/assets/shared/icon-close.svg") no-repeat;
+  z-index: 3;
+}
+
+.logo img {
+  width: 100px;
+  height: auto;
+}
+
+#main_nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+#main_nav .highlight {
+  color: var(--red);
+  font-weight: 900;
+}
+
+#main_nav .help{
+  background-color: var(--gray);
+  width: 100%;
+}
+#main_nav .main_nav_hover{
+  padding: 15px;
+}
+
+#main_nav .main_nav_hover:hover{
+  background-color: var(--gray);
+  border-radius: 30px;
+}
+
+#main_nav #hamburguer_nav ul li:hover{
+  color: var(--red);
+}
+
+@media only screen and (min-width: 600px) {
+  
+}

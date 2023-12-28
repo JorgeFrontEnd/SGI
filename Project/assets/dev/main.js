@@ -8,7 +8,7 @@ let cena = new THREE.Scene()
 /* geometria...  (novo)*/
 let carregador = new GLTFLoader()
 carregador.load(
-    'model/vintageDesk.gltf', 
+    //'model/vintageDesk.gltf', 
     function ( gltf ) {
         cena.add( gltf.scene )
     }
