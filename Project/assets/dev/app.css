@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Silkscreen:wght@400;700&display=swap');
 
+/**************************************GENERAL CONFIGS*****************************************/
 :root{
   --red:#e02948;
   --white:#ffff;
@@ -11,6 +12,12 @@
   box-sizing: border-box;
 }
 
+body{
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -18,10 +25,253 @@ ul {
 }
 
 a {
-  cursor: pointer;
   text-decoration: none;
 }
 
+col{
+  width: 100%;
+}
+
+/************************************************HEADER****************************************/
+header a{
+  color: var(--black);
+}
+
+header{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+  "hamburguer_nav logo shortcuts"
+  "search search search"
+  "shortcuts_nav shortcuts_nav shortcuts_nav";
+  justify-items: center;
+  align-items: center;
+  padding-top: 2%;
+}
+
+header .logo{
+  grid-area: logo;
+  justify-self: end;
+  margin-right: 30px;
+}
+
+header .search{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  grid-area: search;
+}
+
+header .search input {
+  width: inherit;
+  border-radius: 32px;
+  border: none;
+  background-color: var(--gray);
+  padding: 9px;
+  height: inherit;
+}
+
+header .search input::placeholder {
+  position: absolute;
+  left: 50px;
+}
+
+header .search img {
+  position: absolute;
+  left: 20px;
+  top: calc(50% - 12.5px);
+}
+
+header #hamburguer_nav{
+  grid-area: hamburguer_nav;
+}
+
+header #shortcuts_nav{
+  grid-area: shortcuts_nav;
+}
+
+header .shortcuts{
+  grid-area: shortcuts;
+  justify-self: start;
+  margin-left: 30px;
+}
+
+header .logo img{
+  width: 120px;
+  height: 120px;
+}
+
+header #hamburguer_nav label{
+  cursor: pointer;
+}
+
+header .highlight {
+  color: var(--red);
+  font-weight: 900;
+}
+
+/*************************************Hamburguer Nav******************************************/
+header #hamburguer_nav ul{
+  position: fixed;
+  left: 0;
+  top: 0;
+  flex-direction: column;
+  opacity: 0;
+  display: none;
+  height: 100%;
+  background-color: var(--white);
+  overflow-y: scroll;
+  width: 100%;
+}
+
+#hamburguer_nav{
+  background-color: var(--black);
+  border-radius: 25px;
+  padding: 10px;
+}
+
+
+header #hamburguer_nav ul li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 0 0 4rem;
+}
+
+header #shortcuts_nav ul li{
+  padding: 10px;
+  border-radius: 32px;
+}
+
+header #shortcuts_nav ul li:hover{
+  background-color: #f6f7f9;
+}
+
+header #hamburguer_nav ul li a:hover{
+  color: var(--red);
+  transform: translateX(10px);
+  transition: 0.2s;
+}
+
+header #hamburguer_nav ul li a b:hover{
+  color: var(--black);
+  transform: translateX(10px);
+  transition: 0.2s;
+}
+
+header #hamburguer_nav .hamburguer {
+  position: relative;
+  background: url("/assets/shared/icon-hamburger.svg") no-repeat;
+  width: 24px;
+  height: 24px;
+  z-index: 2;
+}
+
+header #hamburguer_nav #hamburguer_toggle:checked ~ .hamburguer {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background: url("/assets/shared/icon-close.svg") no-repeat;
+  z-index: 1;
+}
+
+header #hamburguer_nav label span{
+  color: var(--white);
+  position: relative;
+  left: 15px;
+  padding: 0 20px 0 20px;
+}
+
+header #hamburguer_nav #hamburguer_toggle:checked ~ .hamburguer span{
+  display: none;
+}
+
+header #hamburguer_toggle {
+    display: none;
+} 
+
+header #hamburguer_toggle:checked~ul{
+  display: block;
+  opacity: 1;
+}
+
+
+/*************************************Shortcuts Nav******************************************/
+
+header #shortcuts_nav ul{
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.product-page-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 1200px) {
+  col{
+    width: 50%;
+  }
+
+  /********************************HEADER******************************************************/
+  header{
+    display: grid;
+    grid-template-columns: 20% auto 55% 20% ;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "logo search search shortcuts"
+    "logo hamburguer_nav shortcuts_nav shortcuts_nav";
+    margin: 0 5% 0 5%;
+  }
+  
+  header .logo{
+    grid-area: logo;
+  }
+  
+  header .search{
+    grid-area: search;
+  }
+  
+  header #hamburguer_nav{
+    grid-area: hamburguer_nav;
+    justify-self: end;
+    margin-right: 30px;
+  }
+  
+  header #shortcuts_nav{
+    grid-area: shortcuts_nav;
+    justify-self: start;
+  }
+  
+  header .shortcuts{
+    grid-area: shortcuts;
+  }
+  
+  header #hamburguer_nav ul{
+    width: 30%;
+  }
+  
+  header #hamburguer_nav label span{
+    color: var(--white);
+    position: relative;
+    left: 15px;
+    padding: 0 20px 0 20px;
+  }
+  header #hamburguer_nav #hamburguer_toggle:checked ~ .hamburguer {
+    left: 26.5%;
+    top: 30px;
+  }
+
+  header #hamburguer_nav label span{
+    color: var(--white);
+    position: relative;
+    left: 15px;
+  }
+}
+/**
 .product-page {
   font-family: "Poppins", sans-serif;
   padding: 0;
@@ -205,3 +455,4 @@ header #main_nav #hamburguer_nav #hamburguer_toggle:checked ~ .hamburguer {
 @media only screen and (min-width: 600px) {
   
 }
+**/

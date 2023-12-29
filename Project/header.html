@@ -1,146 +1,138 @@
 <body>
     <header>
         <div class="logo">
-            <img src="./assets/shared/La-redoute-brand-logo.png">
+            <img src="./assets/shared/La-redoute-brand-logo.png" alt="Laredoute logo">
         </div>
         <div class="search">
-            <img src="./assets/shared/search.svg">
-            <input type="text" placeholder="O que procura?">
+            <input type="text">
+            <img src="./assets/shared/search.svg" alt="Pesquisa">
         </div>
-        <div class="user">
-            <a href="#"><button><img src="./assets/shared/user.svg" alt=""></button></a>
-            <a href="#"><button><img src="./assets/shared/heart.svg" alt=""></button></a>
-            <a href="#"><button><img src="./assets/shared/bag.svg" alt=""></button></a>
-        </div>
-
-        <nav id="main_nav">
+        <nav id="hamburguer_nav">
+            <input id="hamburguer_toggle" type="checkbox">
+            <label class="hamburguer" for="hamburguer_toggle"><span>MENU</span></label>
             <ul>
                 <li>
-                    <nav id="hamburguer_nav">
-                        <input id="hamburguer_toggle" type="checkbox">
-                        <label class="hamburguer" for="hamburguer_toggle"></label>
-                        <span><b>MENU</b></span>
-                        <ul>
-                            <div class="">
-
-                            </div>
-                            <li>
-                                <a class="highlight" href="#">Boutique de Natal</a>
-                            </li>
-                            <li>
-                                <a class="highlight" href="#">Baixa de Preço</a>
-                            </li>
-                            <li>
-                                <a href="#"><b>Case e Jardim</b></a>
-                            </li>
-                            <li>
-                                <a href="#">Têxtil-lar</a>
-                            </li>
-                            <li>
-                                <a href="#">Mobiliário</a>
-                            </li>
-                            <li>
-                                <a href="#">Mobiliário</a>
-                            </li>
-                            <li>
-                                <a href="#">Sofás,cadeirões,poltronas</a>
-                            </li>
-                            <li>
-                                <a href="#">Tapetes,passadeiras</a>
-                            </li>
-                            <li>
-                                <a href="#">Decoração</a>
-                            </li>
-                            <li>
-                                <a href="#">Edredons,almofadas,colchões</a>
-                            </li>
-                            <li>
-                                <a href="#">Jardim,outdoor</a>
-                            </li>
-                            <li>
-                                <a href="#">Eletrodomésticos</a>
-                            </li>
-                            <li>
-                                <a href="#"><b>Moda e Calçado</b></a>
-                            </li>
-                            <li>
-                                <a href="#">Calçado</a>
-                            </li>
-                            <li>
-                                <a href="#">Mulher</a>
-                            </li>
-                            <li>
-                                <a href="#">Lingeria</a>
-                            </li>
-                            <li>
-                                <a href="#">Bebé,puericultura</a>
-                            </li>
-                            <li>
-                                <a href="#">Criança</a>
-                            </li>
-                            <li>
-                                <a href="#">Adolescentes</a>
-                            </li>
-                            <li>
-                                <a href="#">Homem</a>
-                            </li>
-                            <li>
-                                <a href="#">Desporto</a>
-                            </li>
-                            <li>
-                                <a href="#">Outlet</a>
-                            </li>
-                            <li>
-                                <a href="#">Blog | Inspiração</a>
-                            </li>
-                            <li>
-                                <a href="#">Sustentabilidade</a>
-                            </li>
-                            <li>
-                                <a href="#">Baixa de preço</a>
-                            </li>
-                            <li>
-                                <a href="#">Têxtil-lar</a>
-                            </li>
-                            <li>
-                                <a href="#">Mobiliário</a>
-                            </li>
-                            <li>
-                                <a href="#">Moda e Calçado</a>
-                            </li>
-                            <li>
-                                <a href="#">Outlet</a>
-                            </li>
-                            <li>
-                                <a href="#">Business</a>
-                            </li>
-                            <li>
-                                <footer class="help">
-                                    <a href="#">Ajuda e Contactos</a>
-                                </footer>
-                            </li>
-                        </ul>
-                    </nav>
+                    <a class="highlight" href="#">Boutique de Natal</a>
                 </li>
-                <li class="main_nav_hover">
-                    <a class="highlight" href="#">Baixa de preço</a>
+                <li>
+                    <a class="highlight" href="#">Baixa de Preço</a>
                 </li>
-                <li class="main_nav_hover">
-                    <a href="#"><b>Têxtil-lar</b></a>
+                <li>
+                    <a href="#"><b>Case e Jardim</b></a>
                 </li>
-                <li class="main_nav_hover">
-                    <a href="#"><b>Mobiliário</b></a>
+                <li>
+                    <a href="#">Têxtil-lar</a>
                 </li>
-                <li class="main_nav_hover">
+                <li>
+                    <a href="#">Mobiliário</a>
+                </li>
+                <li>
+                    <a href="#">Mobiliário</a>
+                </li>
+                <li>
+                    <a href="#">Sofás,cadeirões,poltronas</a>
+                </li>
+                <li>
+                    <a href="#">Tapetes,passadeiras</a>
+                </li>
+                <li>
+                    <a href="#">Decoração</a>
+                </li>
+                <li>
+                    <a href="#">Edredons,almofadas,colchões</a>
+                </li>
+                <li>
+                    <a href="#">Jardim,outdoor</a>
+                </li>
+                <li>
+                    <a href="#">Eletrodomésticos</a>
+                </li>
+                <li>
                     <a href="#"><b>Moda e Calçado</b></a>
                 </li>
-                <li class="main_nav_hover">
-                    <a href="#"><b>Outlet</b></a>
+                <li>
+                    <a href="#">Calçado</a>
                 </li>
-                <li class="main_nav_hover">
-                    <a href="#"><b>Business</b></a>
+                <li>
+                    <a href="#">Mulher</a>
+                </li>
+                <li>
+                    <a href="#">Lingeria</a>
+                </li>
+                <li>
+                    <a href="#">Bebé,puericultura</a>
+                </li>
+                <li>
+                    <a href="#">Criança</a>
+                </li>
+                <li>
+                    <a href="#">Adolescentes</a>
+                </li>
+                <li>
+                    <a href="#">Homem</a>
+                </li>
+                <li>
+                    <a href="#">Desporto</a>
+                </li>
+                <li>
+                    <a href="#">Outlet</a>
+                </li>
+                <li>
+                    <a href="#">Blog | Inspiração</a>
+                </li>
+                <li>
+                    <a href="#">Sustentabilidade</a>
+                </li>
+                <li>
+                    <a href="#">Baixa de preço</a>
+                </li>
+                <li>
+                    <a href="#">Têxtil-lar</a>
+                </li>
+                <li>
+                    <a href="#">Mobiliário</a>
+                </li>
+                <li>
+                    <a href="#">Moda e Calçado</a>
+                </li>
+                <li>
+                    <a href="#">Outlet</a>
+                </li>
+                <li>
+                    <a href="#">Business</a>
+                </li>
+                <li>
+                    <a href="#">Ajuda e Contactos</a>
                 </li>
             </ul>
         </nav>
+        <nav id="shortcuts_nav">
+            <ul>
+                <li>
+                    <a class="highlight" href="#">Baixa de preço</a>
+                </li>
+                <li>
+                    <a href="#">Têxtil-lar</a>
+                </li>
+                <li>
+                    <a href="#">Mobiliário</a>
+                </li>
+                <li>
+                    <a href="#">Moda e Calçado</a>
+                </li>
+                <li>
+                    <a href="#">Outlet</a>
+                </li>
+                <li>
+                    <a href="#">Business</a>
+                </li>
+            </ul>
+            </nav>
+        <div class="shortcuts">
+            <img src="./assets/shared/user.svg" alt="">
+            <img src="./assets/shared/heart.svg" alt="">
+            <img src="./assets/shared/bag.svg" alt="">
+        </div>
+
     </header>
 </body>

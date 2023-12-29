@@ -1,7 +1,5 @@
-var nav = document.getElementById("nav-placeholder");
+var header = document.getElementById("header_placeholder");
 
 $(function () {
     $("#header_placeholder").load("header.html");
 });
-
-
