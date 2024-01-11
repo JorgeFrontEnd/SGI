@@ -162,7 +162,7 @@ header #hamburguer_nav ul li a b:hover{
 
 header #hamburguer_nav .hamburguer {
   position: relative;
-  background: url("/assets/shared/icon-hamburger.svg") no-repeat;
+  background: url("/Project/assets/shared/icon-hamburger.svg") no-repeat;
   width: 24px;
   height: 24px;
   z-index: 2;
@@ -172,7 +172,7 @@ header #hamburguer_nav #hamburguer_toggle:checked ~ .hamburguer {
   position: absolute;
   right: 15px;
   top: 15px;
-  background: url("/assets/shared/icon-close.svg") no-repeat;
+  background: url("/Project/assets/shared/icon-close.svg") no-repeat;
   z-index: 1;
 }
 
