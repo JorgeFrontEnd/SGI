@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="./assets/dev/app.css">
+    <link rel="stylesheet" href="/Project/assets/dev/app.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <title>Secretária vintage</title>
 </head>
@@ -14,32 +14,46 @@
         <main>
             <div class="product-page-container">
                 <div class="col">
-                    <canvas id="display_content"></canvas>
+                    <div class="center">
+                        <canvas id="display_content"></canvas>
+                    </div>
                 </div>
                 <div class="col">
                     <div class="desk-info">
                         <div class="title">
-
+                            Secretária Vintage
                         </div>
-                        <div class="description">
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Descrição"></textarea>
+                        <div class="col description">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quo, incidunt officia a
+                            eveniet debitis eaque facilis eligendi perspiciatis omnis error tenetur, corporis possimus
+                            ea, eius cum modi itaque velit!
                         </div>
                         <div class="change-color">
-                            <input type="radio" name="white_color" value="white">
-                            <label for="white">Branco</label>
-                            <input type="radio" name="blue_color" value="white">
-                            <label for="white">Blue</label>
+                            <select id="colorSelector" name="colors">
+                                <option value="" disabled selected>Cor</option>
+                                <option value="blue">Azul</option>
+                                <option value="normal">Normal</option>
+                            </select>
+
                         </div>
                         <div class="change-size">
-                            
+                            <select name="size" id="sizeSelector">
+                                <option value="" disabled selected>Tamanho</option>
+                                <option value="size_M">192cm x 108cm</option>
+                                <option value="size_L">192cm x 128cm</option>
+                                <option value="size_XL">192cm x 168cm</option>
+                            </select>
                         </div>
-                        
+                        <div class="add-to-car">
+                            <div class="counter"></div>
+                            <button id="btn_add_car">Adicionar ao carrinho</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
-    <script async src="./node_modules/unpkg.com_es-module-shims@1.8.0_dist_es-module-shims.js"></script>
+    <script async src="/Project/node_modules/unpkg.com_es-module-shims@1.8.0_dist_es-module-shims.js"></script>
     <script type="importmap">
         {
             "imports": {
@@ -48,8 +62,8 @@
             }
         }
     </script>
-    <script type="module" src="/Project/assets/dev/header.js"></script>
-    <script src="/Project/assets/dev/header.js"></script>
+    <script type="module" src="./assets/dev/3d.js"></script>
+    <script src="./assets/dev/header.js"></script>
 </body>
 
 </html>

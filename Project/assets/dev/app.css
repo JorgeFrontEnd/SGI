@@ -28,8 +28,9 @@ a {
   text-decoration: none;
 }
 
-col{
+.col{
   width: 100%;
+  padding: 2%;
 }
 
 /************************************************HEADER****************************************/
@@ -52,7 +53,7 @@ header{
 
 header .logo{
   grid-area: logo;
-  justify-self: end;
+  justify-self: center;
   margin-right: 30px;
 }
 
@@ -93,7 +94,6 @@ header #shortcuts_nav{
 
 header .shortcuts{
   grid-area: shortcuts;
-  justify-self: start;
   margin-left: 30px;
 }
 
@@ -211,8 +211,15 @@ header #shortcuts_nav ul{
   align-items: center;
 }
 
+.product-page-container .center{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+/*************************************Product page******************************************/
+
 @media (min-width: 1200px) {
-  col{
+  .col{
     width: 50%;
   }
 
