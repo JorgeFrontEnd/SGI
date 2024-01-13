@@ -33,6 +33,8 @@ new OrbitControls(camara, renderer.domElement) // sem o THREE.
 let delta = 0;			  // tempo desde a última atualização
 let relogio = new THREE.Clock(); // componente que obtém o delta
 let latencia_minima = 1 / 60;    // tempo mínimo entre cada atualização
+let misturador = new THREE.AnimationMixer(cena)
+
 function animar() {
     requestAnimationFrame(animar);  // agendar animar para o próximo animation frame
     delta += relogio.getDelta();    // acumula tempo que passou desde a ultima chamada de getDelta
@@ -43,6 +45,15 @@ function animar() {
     renderer.render(cena, camara)
 
     delta = delta % latencia_minima;// atualizar delta com o excedente
+}
+function animarLeftDoor(){
+    delta += relogio.getDelta()
+    if (delta < latencia_minima) 
+     return;
+    misturador.update(Math.floor(delta / latencia_minima)* latencia_minima)
+    renderer.render(cena, camara)
+    delta = delta % latencia_minima
+    misturador.update(relogio.getDelta())
 }
 
 function luzes(cena) {
@@ -78,6 +89,8 @@ let Gaveta_L, Gaveta_R, Porta_L, Porta_R;
 
 let loader = new GLTFLoader();
 let model;
+let open_left_door_clip;
+let open_left_door_action;
 
 loader.load('model/vintageDesk.gltf', function (gltf) {
     model = gltf.scene;
@@ -107,13 +120,11 @@ loader.load('model/vintageDesk.gltf', function (gltf) {
             child.material = Wood_Normal_Material;
         }
     });
-    const animations = gltf.animations
 
-    const mixer = new THREE.AnimationMixer(model)
+    open_left_door_clip = THREE.AnimationClip.findByName(gltf.animations,'GavetaDirAbrir')
+    open_left_door_action = misturador.clipAction(open_left_door_clip)
+    open_left_door_action.play()
 
-    animations.forEach((clip) => {
-        mixer.clipAction(clip).play()
-    })
     cena.add(model);
 });
 
@@ -204,6 +215,7 @@ function changeSize() {
 
 document.getElementById('sizeSelector').addEventListener('change', changeSize)
 document.getElementById('colorSelector').addEventListener('change', changeColor);
+document.getElementById('btn_open_left').addEventListener('click', animarLeftDoor)
 
 luzes(cena)
 animar()
