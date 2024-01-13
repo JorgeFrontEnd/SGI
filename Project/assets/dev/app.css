@@ -6,6 +6,7 @@
   --white:#ffff;
   --black: #13151b;
   --gray: #f6f7f9;
+  --gray2: #D9D9D9;
 }
 
 * {
@@ -207,6 +208,7 @@ header #shortcuts_nav ul{
 
 .product-page-container{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -214,8 +216,55 @@ header #shortcuts_nav ul{
 .product-page-container .center{
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
 }
+
+.product-page-container .interaction button{
+  background-color: #D9D9D9;
+  border: none;
+  padding: 5%;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.product-page-container .interaction button:hover{
+  background-color: #D9D9;
+}
+
+.product-page-container #btn_add_car{
+  background-color: var(--black);
+  color: var(--white);
+  border: none;
+  padding: 8px;
+  width: 50%;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.product-page-container .desk-info div{
+  background-color: var(--gray);
+  margin: 10px;
+  font-weight: bold;
+  width: 100%;
+}
+
+.product-page-container .desk-info .title{
+  text-align: center;
+}
+
+.product-page-container .desk-info div:last-child{
+  background-color: var(--white);
+  margin: 10px;
+}
+
+.product-page-container .desk-info select{
+    border: none;
+    background-color: var(--gray);
+    width: 100%;
+    padding: 10px;
+}
+
 /*************************************Product page******************************************/
 
 @media (min-width: 1200px) {
@@ -276,5 +325,10 @@ header #shortcuts_nav ul{
     color: var(--white);
     position: relative;
     left: 15px;
+  }
+
+  .product-page-container{
+    display: flex;
+    flex-direction: row;
   }
 }

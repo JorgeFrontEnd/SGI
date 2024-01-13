@@ -123,29 +123,24 @@ function changeColor() {
 
     switch (selectedColor) {
         case 'blue':
-            if (Porta_L && Porta_L.isGroup) {
+            if (Porta_L && Porta_L.isGroup || Porta_R && Porta_R.isGroup) {
                 Porta_L.children.forEach((child) => {
                     if (child.isMesh) {
                         child.material = Wicker_Blue_Material;
                     }
                 });
-            }
-            if (Porta_R && Porta_R.isGroup) {
                 Porta_R.children.forEach((child) => {
                     if (child.isMesh) {
                         child.material = Wicker_Blue_Material;
                     }
                 });
             }
-            if (Gaveta_R && Gaveta_R.isGroup) {
+            if (Gaveta_R && Gaveta_R.isGroup || Gaveta_L && Gaveta_L.isGroup) {
                 Gaveta_R.children.forEach((child) => {
                     if (child.isMesh) {
                         child.material = Wood_Blue_Material;
                     }
                 });
-            }
-
-            if (Gaveta_L && Gaveta_L.isGroup) {
                 Gaveta_L.children.forEach((child) => {
                     if (child.isMesh) {
                         child.material = Wood_Blue_Material;
@@ -154,28 +149,24 @@ function changeColor() {
             }
             break;
         case 'normal':
-            if (Porta_L && Porta_L.isGroup) {
+            if (Porta_L && Porta_L.isGroup || Porta_R && Porta_R.isGroup) {
                 Porta_L.children.forEach((child) => {
                     if (child.isMesh) {
                         child.material = Wicker_Normal_Material;
                     }
                 });
-            }
-            if (Porta_R && Porta_R.isGroup) {
                 Porta_R.children.forEach((child) => {
                     if (child.isMesh) {
                         child.material = Wicker_Normal_Material;
                     }
                 });
             }
-            if (Gaveta_L && Gaveta_L.isGroup) {
+            if (Gaveta_L && Gaveta_L.isGroup || Gaveta_R && Porta_R.isGroup) {
                 Gaveta_L.children.forEach((child) => {
                     if (child.isMesh) {
                         child.material = Wood_Normal_Material;
                     }
                 });
-            }
-            if (Gaveta_R && Porta_R.isGroup) {
                 Gaveta_R.children.forEach((child) => {
                     if (child.isMesh) {
                         child.material = Wood_Normal_Material;
@@ -211,8 +202,7 @@ function changeSize() {
     }
 }
 
-
-document.getElementById('sizeSelector').addEventListener('change',changeSize)
+document.getElementById('sizeSelector').addEventListener('change', changeSize)
 document.getElementById('colorSelector').addEventListener('change', changeColor);
 
 luzes(cena)
