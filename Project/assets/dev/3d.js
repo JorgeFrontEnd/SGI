@@ -36,15 +36,13 @@ wood_normal_texture.wrapT = THREE.RepeatWrapping;
 wood_normal_texture.magFilter = THREE.NearestFilter;
 wood_normal_texture.rotation = 1.571;
 wood_normal_texture.repeat.set(4, 4);
-const material = new THREE.MeshBasicMaterial({
+let wood_material = new THREE.MeshBasicMaterial({
     map: wood_normal_texture,
     side: THREE.DoubleSide,
 });
 
 
 /***************************************ANIMAÇÕES******************************************************/
-
-// OBJETOS INDIVIDUAIS
 
 let loader = new GLTFLoader();
 let model;
@@ -53,6 +51,27 @@ loader.load('model/aparador.gltf', function (gltf) {
     model = gltf.scene;
     cena.add(model);
 });
+
+function changeColor() {
+    const colorSelector = document.getElementById('colorSelector');
+    const selectedColor = colorSelector.value;
+
+    switch (selectedColor) {
+        case 'blue':
+            // Traverse through all the model's children and change their material color to blue
+            model.traverse(child => {
+                if (child.isMesh) {
+                    
+                }
+            });
+            break;
+        default:
+            break;
+    }
+
+    // Ensure to update the scene to reflect the changes
+}
+
 
 function changeSize() {
     const sizeSelector = document.getElementById('sizeSelector');
@@ -74,10 +93,7 @@ function changeSize() {
     }
 }
 
-function render() {
-    renderer.render(cena, camara);
-}
-
+document.getElementById('colorSelector').addEventListener('change', changeColor);
 document.getElementById('sizeSelector').addEventListener('change', changeSize);
 
 animate();

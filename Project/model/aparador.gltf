@@ -27,7 +27,7 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Gaveta3",
+			"name":"gaveta_baixo",
 			"translation":[
 				0.6205049753189087,
 				0.32729098200798035,
@@ -45,7 +45,7 @@
 		},
 		{
 			"mesh":2,
-			"name":"Porta1",
+			"name":"porta_direita",
 			"translation":[
 				0.1356315016746521,
 				0.5524040460586548,
@@ -63,7 +63,7 @@
 		},
 		{
 			"mesh":4,
-			"name":"Porta2",
+			"name":"porta_esquerda",
 			"translation":[
 				-0.6904075145721436,
 				0.5524040460586548,
@@ -72,7 +72,7 @@
 		},
 		{
 			"mesh":5,
-			"name":"Porta3",
+			"name":"porta_meio",
 			"translation":[
 				-0.27617132663726807,
 				0.552375316619873,
@@ -81,7 +81,7 @@
 		},
 		{
 			"mesh":6,
-			"name":"Gaveta1",
+			"name":"gaveta_cima",
 			"translation":[
 				0.6205049753189087,
 				0.727114737033844,
@@ -90,7 +90,7 @@
 		},
 		{
 			"mesh":7,
-			"name":"Gaveta2",
+			"name":"gaveta_meio",
 			"translation":[
 				0.6205049753189087,
 				0.527202844619751,
@@ -283,7 +283,7 @@
 	],
 	"meshes":[
 		{
-			"name":"Cube.005",
+			"name":"gaveta_baixo_material",
 			"primitives":[
 				{
 					"attributes":{
@@ -341,7 +341,7 @@
 			]
 		},
 		{
-			"name":"Plane",
+			"name":"porta_direita_material",
 			"primitives":[
 				{
 					"attributes":{
@@ -387,7 +387,7 @@
 			]
 		},
 		{
-			"name":"Plane.020",
+			"name":"porta_esquerda_material",
 			"primitives":[
 				{
 					"attributes":{
@@ -419,7 +419,7 @@
 			]
 		},
 		{
-			"name":"Plane.021",
+			"name":"porta_meio_material",
 			"primitives":[
 				{
 					"attributes":{
@@ -451,7 +451,7 @@
 			]
 		},
 		{
-			"name":"Cube.001",
+			"name":"gaveta_cima_material",
 			"primitives":[
 				{
 					"attributes":{
@@ -486,7 +486,7 @@
 			]
 		},
 		{
-			"name":"Cube.002",
+			"name":"gaveta_meio_material",
 			"primitives":[
 				{
 					"attributes":{
