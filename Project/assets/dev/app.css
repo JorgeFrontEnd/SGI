@@ -174,7 +174,7 @@ header #hamburguer_nav #hamburguer_toggle:checked~.hamburguer {
   right: 15px;
   top: 15px;
   background: url("/Project/assets/shared/icon-close.svg") no-repeat;
-  z-index: 1;
+  z-index: 2;
 }
 
 header #hamburguer_nav label span {
@@ -195,6 +195,7 @@ header #hamburguer_toggle {
 header #hamburguer_toggle:checked~ul {
   display: block;
   opacity: 1;
+  z-index: 1;
 }
 
 
