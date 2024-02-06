@@ -17,14 +17,17 @@
                     <div class="center">
                         <canvas id="display_content"></canvas>
                     </div>
-                    <div class="interaction center">
-                        <div>
-                            <h3>Abrir e Fechar Gavetas</h1>
-                            <button id="btn_open_left">Esquerda Principal</button>
-                            <button id="btn_open_right">Direita Principal</button>
-                            <button id="btn_open_up">Cima</button>
-                            <button id="btn_open_down">Baixo</button>
-                        </div>
+                    <div class="range center">
+                        <input type="range" id="move_model_y" name="move_model_y" min="0" max="360" value="0"/>
+                        <label for="move_model_y">Mover Secretária eixo y</label>
+                    </div>
+                    <div class="range center">
+                        <input type="range" id="move_model_x" name="move_model_x" min="0" max="360" value="0"/>
+                        <label for="move_model_y">Mover Secretária eixo x</label>
+                    </div>
+                    <div class="range center">
+                        <input type="range" id="move_model_z" name="move_model_z" min="0" max="360" value="0"/>
+                        <label for="move_model_y">Mover Secretária eixo z</label>
                     </div>
                 </div>
                 <div class="col">
@@ -39,7 +42,7 @@
                         </div>
                         <div class="change-color">
                             <select id="colorSelector" name="colors">
-                                <option value="" disabled selected>Cor</option>
+                                <option value="" disabled selected>Escolher Cor</option>
                                 <option value="blue">Azul</option>
                                 <option value="normal">Normal</option>
                             </select>
@@ -47,11 +50,21 @@
                         </div>
                         <div class="change-size">
                             <select name="size" id="sizeSelector">
-                                <option value="" disabled selected>Tamanho</option>
+                                <option value="" disabled selected>Escolher Tamanho</option>
                                 <option value="size_M">192cm x 108cm</option>
                                 <option value="size_L">192cm x 128cm</option>
                                 <option value="size_XL">192cm x 168cm</option>
                             </select>
+                        </div>
+                        <div class="interaction center">
+                            <div>
+                                <button id="btn_open_drawers">Abrir/Fechar gavetas</button>
+                                <button id="btn_open_doors">Abrir/Fechar Portas</button>
+                                <button id="btn_remove_objects">Remover objetos</button>
+                                <input type="range" id="move_camera" name="move_camera" min="0" max="360" value="0"/>
+                                <label for="move_camera">Mover Camara</label>
+                                <button id="btn_change_lights">Mudar luzes</button>
+                            </div>
                         </div>
                         <div class="add-to-car">
                             <div class="counter"></div>
@@ -71,6 +84,7 @@
             }
         }
     </script>
+    <!-- <script type="module" src="./assets/dev/messaje.js"></script> -->
     <script type="module" src="./assets/dev/3d.js"></script>
     <script src="./assets/dev/header.js"></script>
 </body>
