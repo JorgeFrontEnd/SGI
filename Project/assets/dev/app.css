@@ -265,11 +265,38 @@ header #shortcuts_nav ul {
 }
 
 .product-page-container .desk-info select {
+  position: relative;
   border: none;
   background-color: var(--gray);
   width: 100%;
   padding: 10px;
 }
+
+.product-page-container .desk-info .change-color{
+  position: relative;
+}
+
+.product-page-container .desk-info .select-secretary{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 25px;
+  height: 20px;
+  z-index: 2;
+}
+
+.product-page-container .range-container{
+  display: flex;
+  position: relative;
+  margin-top: 30px;
+}
+
+.range-container label{
+  position: absolute;
+  top: -25px;
+  font-size: 12px;
+}
+
 
 /*************************************Promotion page******************************************/
 

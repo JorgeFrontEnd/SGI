@@ -17,18 +17,21 @@
                     <div class="center">
                         <canvas id="display_content"></canvas>
                     </div>
-                    <div class="range center">
-                        <input type="range" id="move_model_y" name="move_model_y" min="0" max="360" value="0"/>
-                        <label for="move_model_y">Mover Secretária eixo y</label>
+                    <div class="range-container center">
+                        <div class="range center">
+                            <label for="move_model_y">Mover Secretária eixo y</label>
+                            <input type="range" id="move_model_y" name="move_model_y" min="0" max="360" value="0"/>
+                        </div>
+                        <div class="range center">
+                            <label for="move_model_y">Mover Secretária eixo x</label>
+                            <input type="range" id="move_model_x" name="move_model_x" min="0" max="360" value="0"/>
+                        </div>
+                        <div class="range center">
+                            <label for="move_model_y">Mover Secretária eixo z</label>
+                            <input type="range" id="move_model_z" name="move_model_z" min="0" max="360" value="0"/>
+                        </div>
                     </div>
-                    <div class="range center">
-                        <input type="range" id="move_model_x" name="move_model_x" min="0" max="360" value="0"/>
-                        <label for="move_model_y">Mover Secretária eixo x</label>
-                    </div>
-                    <div class="range center">
-                        <input type="range" id="move_model_z" name="move_model_z" min="0" max="360" value="0"/>
-                        <label for="move_model_y">Mover Secretária eixo z</label>
-                    </div>
+                    
                 </div>
                 <div class="col">
                     <div class="desk-info">
@@ -41,10 +44,14 @@
                             ea, eius cum modi itaque velit!
                         </div>
                         <div class="change-color">
+                            <img id="select_secretary_img" class="select-secretary" src="assets/product-page/desk.png">
                             <select id="colorSelector" name="colors">
-                                <option value="" disabled selected>Escolher Cor</option>
-                                <option value="blue">Azul</option>
-                                <option value="normal">Normal</option>
+                                <option value="normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Normal</option>
+                                <option value="black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Preto</option>
+                                <option value="gray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cinzento</option>
+                                <option value="blue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Azul</option>
+                                <option value="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vermelho</option>
+                                <option value="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verde</option>
                             </select>
 
                         </div>
@@ -61,8 +68,7 @@
                                 <button id="btn_open_drawers">Abrir/Fechar gavetas</button>
                                 <button id="btn_open_doors">Abrir/Fechar Portas</button>
                                 <button id="btn_remove_objects">Remover objetos</button>
-                                <input type="range" id="move_camera" name="move_camera" min="0" max="360" value="0"/>
-                                <label for="move_camera">Mover Camara</label>
+                                <button id="btn_change_camera">Mudar prespectiva da camara</button>
                                 <button id="btn_change_lights">Mudar luzes</button>
                             </div>
                         </div>
