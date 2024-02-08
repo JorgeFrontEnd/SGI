@@ -14,25 +14,35 @@ camara.lookAt(0, 0, 0);
 /* renderer... */
 var canvas = document.getElementById("display_content");
 let renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-renderer.setSize(520, 460);
+renderer.setSize(460, 320);
 renderer.toneMapping = THREE.ReinhardToneMapping;
 renderer.toneMappingExposure = 1.7;
 renderer.shadowMap.enabled = true;
 const controls = new OrbitControls(camara, renderer.domElement); // Use OrbitControls from examples
 
 //set lights
-let luzAmbiente = new THREE.AmbientLight(0xffffff, 0.2);
-cena.add(luzAmbiente);
-var pointLight = new THREE.DirectionalLight(0xffffff, 5);
-pointLight.castShadow = true;
-pointLight.position.set(0, 10, 10);
-var lightHolder = new THREE.Group();
-lightHolder.add(pointLight);
-cena.add(lightHolder);
+//Luminosidade
+function luzes(cena) {
+    const luzAmbiente = new THREE.AmbientLight("lightyellow");
+    cena.add(luzAmbiente);
+
+    const luzPonto = new THREE.PointLight("lightyellow");
+    luzPonto.position.set(0, 2, 2);
+    luzPonto.intensity = 10;
+    cena.add(luzPonto)
+
+    const luzDirecional = new THREE.DirectionalLight("lightyellow");
+    luzDirecional.position.set(3, 2, 0);
+    luzDirecional.intensity = 10
+    cena.add(luzDirecional);
+}
+
+luzes(cena)
 
 var misturador = new THREE.AnimationMixer(cena)
 
 /*********************************************LOAD TEXTURES********************************************/
+
 var wood_normal_texture = new THREE.TextureLoader().load('assets/materials/Wood_Normal_2K.png');
 wood_normal_texture.wrapS = THREE.RepeatWrapping;
 wood_normal_texture.wrapT = THREE.RepeatWrapping;
@@ -120,6 +130,9 @@ let open_gaveta_baixo,
     open_porta_direita,
     open_porta_meio,
     open_porta_esquerda;
+let ocultos = ['Cactus','Plant','Vase','Chair','Pad','Base','Monitor','Teclado'];
+let ocultos_aux = [];
+let ocultos_boolean = false;
 
 loader.load('model/aparador.gltf',
     function (gltf) {
@@ -128,6 +141,9 @@ loader.load('model/aparador.gltf',
         misturador = new THREE.AnimationMixer(model);
 
         model.traverse(function (x) {
+            if (ocultos.indexOf(x.name) != -1) {
+                ocultos_aux.push(x)
+            }
             if (x.name === 'gaveta_baixo') {
                 gaveta_baixo = x;
                 let animOpenGB = THREE.AnimationClip.findByName(gltf.animations, 'gaveta_baixoAction');
@@ -162,7 +178,6 @@ loader.load('model/aparador.gltf',
         setInitialColor()
     }
 )
-
 
 // Criar o Raycaster
 const raycaster = new THREE.Raycaster();
@@ -408,13 +423,13 @@ function changeSize() {
 
     switch (selectedSize) {
         case 'size_M':
-            model.scale.set(1.1, 1, 1);
+            model.scale.set(1, 1, 1);
             break;
         case 'size_L':
-            model.scale.set(1.2, 1, 1);
+            model.scale.set(1.1, 1, 1);
             break;
         case 'size_XL':
-            model.scale.set(1.3, 1, 1);
+            model.scale.set(1.2, 1, 1);
             break;
         default:
             model.scale.set(1, 1, 1);
@@ -485,15 +500,44 @@ function change_camera() {
     }
 }
 
+function change_lights() {
+    clickCount += 1;
+    switch (clickCount) {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            clickCount = 0;
+            break;
+    }
+}
+
+function removeObjects() {
+    for (let i = 0; i < ocultos_aux.length; i++) {
+        ocultos_aux[i].visible = ocultos_boolean;
+    }
+    if (ocultos_boolean) {
+        ocultos_boolean = false;
+    }
+    else {
+        ocultos_boolean = true;
+    }
+
+}
+
 document.getElementById('colorSelector').addEventListener('change', changeColor);
 document.getElementById('sizeSelector').addEventListener('change', changeSize);
 document.getElementById('move_model_y').addEventListener('input', move_model_y);
 document.getElementById('move_model_x').addEventListener('input', move_model_x);
 document.getElementById('move_model_z').addEventListener('input', move_model_z);
 document.getElementById('btn_change_camera').addEventListener('click', change_camera);
+document.getElementById('btn_remove_objects').addEventListener('click',removeObjects)
 document.getElementById("btn_open_drawers").addEventListener('click', playGavetas);
 document.getElementById("btn_open_doors").addEventListener('click', playPortas);
-
+document.getElementById('btn_change_lights').addEventListener('click', change_lights);
 let delta = 0;
 let relogio = new THREE.Clock();
 let latencia_minima = 1 / 60;
