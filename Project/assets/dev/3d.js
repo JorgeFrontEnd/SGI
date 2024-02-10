@@ -14,11 +14,10 @@ camara.lookAt(0, 0, 0);
 /* renderer... */
 var canvas = document.getElementById("display_content");
 let renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-renderer.setSize(460, 320);
+renderer.setSize(520, 360);
 renderer.toneMapping = THREE.ReinhardToneMapping;
 renderer.toneMappingExposure = 1.7;
 renderer.shadowMap.enabled = true;
-const controls = new OrbitControls(camara, renderer.domElement); // Use OrbitControls from examples
 
 //set lights
 //Luminosidade
@@ -317,7 +316,6 @@ function setInitialColor() {
         if (object) {
             object.traverse(child => {
                 if (child.isMesh) {
-                    // Set the initial material here
                     child.material = wood_normal_material;
                 }
             });
@@ -332,6 +330,7 @@ function changeColor() {
     const selectedColor = colorSelector.value;
     switch (selectedColor) {
         case 'normal':
+            console.log(model);
             nodesToChange.forEach(nodeName => {
                 const object = model.getObjectByName(nodeName, true); // Recursive search
                 if (object) {
@@ -420,7 +419,6 @@ function changeColor() {
 function changeSize() {
     const sizeSelector = document.getElementById('sizeSelector');
     const selectedSize = sizeSelector.value;
-
     switch (selectedSize) {
         case 'size_M':
             model.scale.set(1, 1, 1);
@@ -500,21 +498,6 @@ function change_camera() {
     }
 }
 
-function change_lights() {
-    clickCount += 1;
-    switch (clickCount) {
-        case 1:
-            break;
-        case 2:
-            break;
-        case 3:
-            break;
-        case 4:
-            clickCount = 0;
-            break;
-    }
-}
-
 function removeObjects() {
     for (let i = 0; i < ocultos_aux.length; i++) {
         ocultos_aux[i].visible = ocultos_boolean;
@@ -537,7 +520,6 @@ document.getElementById('btn_change_camera').addEventListener('click', change_ca
 document.getElementById('btn_remove_objects').addEventListener('click',removeObjects)
 document.getElementById("btn_open_drawers").addEventListener('click', playGavetas);
 document.getElementById("btn_open_doors").addEventListener('click', playPortas);
-document.getElementById('btn_change_lights').addEventListener('click', change_lights);
 let delta = 0;
 let relogio = new THREE.Clock();
 let latencia_minima = 1 / 60;

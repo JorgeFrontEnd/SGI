@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="/Project/assets/dev/app.css">
+    <link rel="stylesheet" href="./assets/dev/app.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <title>Secretária vintage</title>
 </head>
@@ -20,18 +20,18 @@
                     <div class="range-container center">
                         <div class="range center">
                             <label for="move_model_y">Mover modelo eixo y</label>
-                            <input type="range" id="move_model_y" name="move_model_y" min="0" max="360" value="0"/>
+                            <input type="range" id="move_model_y" name="move_model_y" min="0" max="360" value="0" />
                         </div>
                         <div class="range center">
                             <label for="move_model_y">Mover modelo eixo x</label>
-                            <input type="range" id="move_model_x" name="move_model_x" min="0" max="360" value="0"/>
+                            <input type="range" id="move_model_x" name="move_model_x" min="0" max="360" value="0" />
                         </div>
                         <div class="range center">
                             <label for="move_model_y">Mover modelo eixo z</label>
-                            <input type="range" id="move_model_z" name="move_model_z" min="0" max="360" value="0"/>
+                            <input type="range" id="move_model_z" name="move_model_z" min="0" max="360" value="0" />
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="col">
                     <div class="desk-info">
@@ -39,9 +39,13 @@
                             Secretária Vintage
                         </div>
                         <div class="col description">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quo, incidunt officia a
-                            eveniet debitis eaque facilis eligendi perspiciatis omnis error tenetur, corporis possimus
-                            ea, eius cum modi itaque velit!
+                            • Em MDF folha de carvalho, acabamento com verniz nitrocelulósico
+                            <br>
+                            • Pés afunilados e puxadores em freixo maciço, acabamento com verniz nitrocelulósico
+                            <br>
+                            • 1 compartimento com 3 portas
+                            <br>
+                            • 1 compartimento com 3 gavetas, ranhuras em aço
                         </div>
                         <div class="change-color">
                             <img id="select_secretary_img" class="select-secretary" src="assets/product-page/desk.png">
@@ -63,16 +67,21 @@
                                 <option value="size_XL">192cm x 168cm</option>
                             </select>
                         </div>
-                        <div class="interaction center">
-                            <div>
-                                <button id="btn_open_drawers">Abrir/Fechar gavetas</button>
-                                <button id="btn_open_doors">Abrir/Fechar Portas</button>
-                                <button id="btn_remove_objects">Ocultar/Expor objetos</button>
-                                <button id="btn_change_camera">Mudar prespectiva da camara</button>
-                                <button id="btn_change_lights">Mudar luzes</button>
-                            </div>
+                    </div>
+                    <div class="interaction">
+                        <div>
+                            <button id="btn_open_drawers">Abrir/Fechar gavetas</button>
                         </div>
-                        <div class="add-to-car">
+                        <div>
+                            <button id="btn_open_doors">Abrir/Fechar Portas</button>
+                        </div>
+                        <div>
+                            <button id="btn_remove_objects">Ocultar/Expor objetos</button>
+                        </div>
+                        <div>
+                            <button id="btn_change_camera">Mudar prespectiva da camara</button>
+                        </div>
+                        <div class="add-to-car center">
                             <div class="counter"></div>
                             <button id="btn_add_car">Adicionar ao carrinho</button>
                         </div>
@@ -90,7 +99,6 @@
             }
         }
     </script>
-    <!-- <script type="module" src="./assets/dev/messaje.js"></script> -->
     <script type="module" src="./assets/dev/3d.js"></script>
     <script src="./assets/dev/header.js"></script>
 </body>

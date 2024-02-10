@@ -3,6 +3,7 @@
 /**************************************GENERAL CONFIGS*****************************************/
 :root {
   --red: #e02948;
+  --red2:#ff3f52;
   --white: #ffff;
   --black: #13151b;
   --gray: #f6f7f9;
@@ -199,7 +200,7 @@ header #hamburguer_toggle:checked~ul {
 }
 
 .range{
-  width: 100%;
+ margin: 0 20px 0 20px;
 }
 
 /*************************************Shortcuts Nav******************************************/
@@ -224,17 +225,30 @@ header #shortcuts_nav ul {
   justify-content: center;
 }
 
+.product-page-container .interaction {
+ display: grid;
+ grid-template-columns: 1fr 1fr 1fr;
+ grid-template-rows: 100px 100px;
+}
+
+.product-page-container .interaction .add-to-car{
+    grid-column-start: 2;
+    grid-column-end: 4;
+ }
+
 .product-page-container .interaction button {
   background-color: #D9D9D9;
   border: none;
-  padding: 2%;
   margin: 5px;
   cursor: pointer;
   font-size: 15px;
+  width: 80%;
+  height: 80px;
 }
 
 .product-page-container .interaction button:hover {
-  background-color: #D9D9;
+  background-color: var(--red2);
+  color: var(--white);
 }
 
 .product-page-container #btn_add_car {
@@ -242,21 +256,29 @@ header #shortcuts_nav ul {
   color: var(--white);
   border: none;
   padding: 8px;
-  width: 50%;
   border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
+  height: 50%;
+}
+
+.product-page-container #btn_add_car:hover{
+  background-color: var(--red2);
 }
 
 .product-page-container .desk-info div {
   background-color: var(--gray);
   margin: 10px;
   font-weight: bold;
-  width: 100%;
+  width: 92%;
 }
 
 .product-page-container .desk-info .title {
   text-align: center;
+}
+
+.product-page-container .desk-info .description {
+  font-weight: normal;
 }
 
 .product-page-container .desk-info div:last-child {
@@ -270,6 +292,8 @@ header #shortcuts_nav ul {
   background-color: var(--gray);
   width: 100%;
   padding: 10px;
+  font-size: 32px;
+  font-weight: bold;
 }
 
 .product-page-container .desk-info .change-color{
@@ -278,10 +302,10 @@ header #shortcuts_nav ul {
 
 .product-page-container .desk-info .select-secretary{
   position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 25px;
-  height: 20px;
+  top: 15px;
+  left: 10px;
+  width: 45px;
+  height: 32px;
   z-index: 2;
 }
 
@@ -302,40 +326,34 @@ header #shortcuts_nav ul {
 
 .promotion-page-container {
   display: grid;
-  justify-items: center;
+  margin: 0 5% 0 5%;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   gap: 1%;
 }
 
-.promotion-page-container .section, .promotion-section{
+.promotion-page-container .promotion-section{
   position: relative;
 }
-
-.promotion-page-container .promotion-section .title{
+.promotion-page-container .promotion-section .title {
   position: absolute;
-  left: 10%;
-  top: 15%;
+  top: 40%;
+  left: 30%;
   text-align: center;
   font-weight: bold;
-  font-size: 24px;
+  font-size: 40px;
 }
 
 .promotion-page-container .promotion-section .title .a{
-  position: absolute;
-  top: 35%;
   color: var(--red);
 }
 
 .promotion-page-container .promotion-section .title div:last-child{
-  position: absolute;
-  bottom: 25%;
   color: var(--white);
 }
 
 .promotion-page-container .title{
-  position: absolute;
-  bottom: 0;
+  color: var(--black);
 }
 
 .promotion-page-container img {
@@ -439,5 +457,32 @@ header #shortcuts_nav ul {
   .promotion-page-container .promotion-page-container img {
     width: 100%;
     height: 95%;
+  }
+
+  .product-page-container .desk-info select {
+    font-size: 14px;
+  }
+
+  .product-page-container .desk-info .select-secretary{
+    top: 10px;
+    left: 5px;
+    width: 25px;
+    height: 20px;
+  }
+
+  .range{
+    margin: 0 30px 0 30px;
+   }
+
+   .range{
+    margin: 0 30px 0 30px;
+   }
+
+   .promotion-page-container .promotion-section .title {
+    position: absolute;
+    top: 35%;
+    left: 17%;
+    text-align: center;
+    font-size: 20px;
   }
 }
