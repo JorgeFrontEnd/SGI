@@ -4,17 +4,16 @@ import * as THREE from 'three';
 
 /* cena... */
 let cena = new THREE.Scene();
-cena.background = new THREE.Color('whitesmoke');
 
 // criar uma camara...
-let camara = new THREE.PerspectiveCamera(50, 1920 / 1080, 0.01, 4000)
-camara.position.set(0, 1, 3);
+let camara = new THREE.PerspectiveCamera(50, 1200 / 520, 0.01,100)
+camara.position.set(3.40, 0.672, 0);
 camara.lookAt(0, 0, 0);
 
-/* renderer... */
+
 var canvas = document.getElementById("display_content");
 let renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-renderer.setSize(520, 360);
+renderer.setSize(620, 500);
 renderer.toneMapping = THREE.ReinhardToneMapping;
 renderer.toneMappingExposure = 1.7;
 renderer.shadowMap.enabled = true;
@@ -27,87 +26,18 @@ function luzes(cena) {
 
     const luzPonto = new THREE.PointLight("lightyellow");
     luzPonto.position.set(0, 2, 2);
-    luzPonto.intensity = 10;
+    luzPonto.intensity = 3;
     cena.add(luzPonto)
 
     const luzDirecional = new THREE.DirectionalLight("lightyellow");
     luzDirecional.position.set(3, 2, 0);
-    luzDirecional.intensity = 10
+    luzDirecional.intensity = 3;
     cena.add(luzDirecional);
 }
 
 luzes(cena)
 
 var misturador = new THREE.AnimationMixer(cena)
-
-/*********************************************LOAD TEXTURES********************************************/
-
-var wood_normal_texture = new THREE.TextureLoader().load('assets/materials/Wood_Normal_2K.png');
-wood_normal_texture.wrapS = THREE.RepeatWrapping;
-wood_normal_texture.wrapT = THREE.RepeatWrapping;
-wood_normal_texture.magFilter = THREE.NearestFilter;
-wood_normal_texture.rotation = 1.571;
-wood_normal_texture.repeat.set(4, 4);
-let wood_normal_material = new THREE.MeshBasicMaterial({
-    map: wood_normal_texture,
-    side: THREE.DoubleSide,
-});
-
-var wood_black_texture = new THREE.TextureLoader().load('assets/materials/Wood_Black_2K.png');
-wood_black_texture.wrapS = THREE.RepeatWrapping;
-wood_black_texture.wrapT = THREE.RepeatWrapping;
-wood_black_texture.magFilter = THREE.NearestFilter;
-wood_black_texture.rotation = 1.571;
-wood_black_texture.repeat.set(4, 4);
-let wood_black_material = new THREE.MeshBasicMaterial({
-    map: wood_black_texture,
-    side: THREE.DoubleSide,
-});
-
-var wood_gray_texture = new THREE.TextureLoader().load('assets/materials/Wood_Gray_2K.png');
-wood_gray_texture.wrapS = THREE.RepeatWrapping;
-wood_gray_texture.wrapT = THREE.RepeatWrapping;
-wood_gray_texture.magFilter = THREE.NearestFilter;
-wood_gray_texture.rotation = 1.571;
-wood_gray_texture.repeat.set(4, 4);
-let wood_gray_material = new THREE.MeshBasicMaterial({
-    map: wood_gray_texture,
-    side: THREE.DoubleSide,
-});
-
-var wood_blue_texture = new THREE.TextureLoader().load('assets/materials/Wood_Blue_2K.png');
-wood_blue_texture.wrapS = THREE.RepeatWrapping;
-wood_blue_texture.wrapT = THREE.RepeatWrapping;
-wood_blue_texture.magFilter = THREE.NearestFilter;
-wood_blue_texture.rotation = 1.571;
-wood_blue_texture.repeat.set(4, 4);
-let wood_blue_material = new THREE.MeshBasicMaterial({
-    map: wood_blue_texture,
-    side: THREE.DoubleSide,
-});
-
-var wood_red_texture = new THREE.TextureLoader().load('assets/materials/Wood_Red_2K.png');
-wood_red_texture.wrapS = THREE.RepeatWrapping;
-wood_red_texture.wrapT = THREE.RepeatWrapping;
-wood_red_texture.magFilter = THREE.NearestFilter;
-wood_red_texture.rotation = 1.571;
-wood_red_texture.repeat.set(4, 4);
-let wood_red_material = new THREE.MeshBasicMaterial({
-    map: wood_red_texture,
-    side: THREE.DoubleSide,
-});
-
-var wood_green_texture = new THREE.TextureLoader().load('assets/materials/Wood_Green_2K.png');
-wood_green_texture.wrapS = THREE.RepeatWrapping;
-wood_green_texture.wrapT = THREE.RepeatWrapping;
-wood_green_texture.magFilter = THREE.NearestFilter;
-wood_green_texture.rotation = 1.571;
-wood_green_texture.repeat.set(4, 4);
-let wood_green_material = new THREE.MeshBasicMaterial({
-    map: wood_green_texture,
-    side: THREE.DoubleSide,
-});
-/******************************************END LOAD TEXTURES********************************************/
 
 function render() {
     renderer.render(cena, camara);
@@ -116,326 +46,382 @@ function render() {
 /***************************************ANIMAÇÕES******************************************************/
 
 let loader = new GLTFLoader();
-let model;
-let gaveta_baixo,
-    gaveta_meio,
-    gaveta_cima,
-    porta_direita,
-    porta_meio,
-    porta_esquerda;
-let open_gaveta_baixo,
-    open_gaveta_meio,
-    open_gaveta_cima,
-    open_porta_direita,
-    open_porta_meio,
-    open_porta_esquerda;
-let ocultos = ['Cactus','Plant','Vase','Chair','Pad','Base','Monitor','Teclado'];
-let ocultos_aux = [];
-let ocultos_boolean = false;
+let model, model2;;
+let CircleJoint,LongArm,AbajurJoint,ShortArm,ArmToAbajurJoint;
+let move_CircleJoint,move_LongArm, move_AbajurJoint,move_ShortArm,move_ArmToAbajurJoint;
+let loader2 = new GLTFLoader(); 
+let clickCount2 = 0;
+let clickCount3 = 0;
 
-loader.load('model/aparador.gltf',
-    function (gltf) {
-        model = gltf.scene
-        cena.add(model)
-        misturador = new THREE.AnimationMixer(model);
+loadMainScenario()
 
-        model.traverse(function (x) {
-            if (ocultos.indexOf(x.name) != -1) {
-                ocultos_aux.push(x)
-            }
-            if (x.name === 'gaveta_baixo') {
-                gaveta_baixo = x;
-                let animOpenGB = THREE.AnimationClip.findByName(gltf.animations, 'gaveta_baixoAction');
-                open_gaveta_baixo = misturador.clipAction(animOpenGB);
-            }
-            if (x.name === 'gaveta_meio') {
-                gaveta_meio = x;
-                let animOpenGM = THREE.AnimationClip.findByName(gltf.animations, 'gaveta_meioAction');
-                open_gaveta_meio = misturador.clipAction(animOpenGM);
-            }
-            if (x.name === 'gaveta_cima') {
-                gaveta_cima = x;
-                let animOpenGC = THREE.AnimationClip.findByName(gltf.animations, 'gaveta_cimaAction');
-                open_gaveta_cima = misturador.clipAction(animOpenGC);
-            }
-            if (x.name === 'porta_direita') {
-                porta_direita = x;
-                let animOpenPD = THREE.AnimationClip.findByName(gltf.animations, 'porta_direitaAction');
-                open_porta_direita = misturador.clipAction(animOpenPD);
-            }
-            if (x.name === 'porta_meio') {
-                porta_meio = x;
-                let animOpenPM = THREE.AnimationClip.findByName(gltf.animations, 'porta_meioAction');
-                open_porta_meio = misturador.clipAction(animOpenPM);
-            }
-            if (x.name === 'porta_esquerda') {
-                porta_esquerda = x;
-                let animOpenPE = THREE.AnimationClip.findByName(gltf.animations, 'porta_esquerdaAction');
-                open_porta_esquerda = misturador.clipAction(animOpenPE);
-            }
-        })
-        setInitialColor()
+function removeScenario(){
+    clickCount2  += 1;
+    switch (clickCount2 ) {
+        case 1:
+            loadSecondScenario();
+                if (model) {
+                    cena.remove(model);
+                }
+            document.getElementById("btn_remove_scenario").textContent="mostrar cenario";
+            break;
+        case 2:
+                loadMainScenario();
+                if (model2) {
+                    
+                    cena.remove(model2);
+                }
+                clickCount2 = 0;
+            document.getElementById("btn_remove_scenario").textContent="remover cenario";
+            break;    
     }
-)
+}   
 
+function loadMainScenario(){
+    loader.load('model/ApliqueArticuladoPecaUnica2.gltf',
+        function (gltf) {
+            model = gltf.scene
+            cena.add(model)
+            misturador = new THREE.AnimationMixer(model);
+            model.traverse(function (x) {
+                if (x.name === 'SupportJoint') {
+                    CircleJoint = x;
+                    let animOpenGB = THREE.AnimationClip.findByName(gltf.animations, 'SupportJointAction');
+                    move_CircleJoint = misturador.clipAction(animOpenGB);
+                }
+                
+                if (x.name === 'LongArm') {
+                    LongArm = x;
+                    let animOpenGM = THREE.AnimationClip.findByName(gltf.animations, 'LongArmAction');
+                    move_LongArm = misturador.clipAction(animOpenGM);
+                }
+                if (x.name === 'AbajurJoint') {
+                    AbajurJoint = x;
+                    let animOpenPM = THREE.AnimationClip.findByName(gltf.animations, 'AbajurJointAction');
+                    move_AbajurJoint = misturador.clipAction(animOpenPM);
+                }
+                if (x.name === 'ShortArm') {
+                    ShortArm = x;
+                    let animOpenPM = THREE.AnimationClip.findByName(gltf.animations, 'ShortArmAction');
+                    move_ShortArm = misturador.clipAction(animOpenPM);
+                }
+                if (x.name === 'ArmToAbajurJoint') {
+                    ArmToAbajurJoint = x;
+                    let animOpenPM = THREE.AnimationClip.findByName(gltf.animations, 'ArmToAbajurJointAction');
+                    move_ArmToAbajurJoint = misturador.clipAction(animOpenPM);
+                }
+            })
+        })
+}
+
+function loadSecondScenario(){
+    loader2.load('model/ApliquePe.gltf',
+        function (gltf) {
+            model2 = gltf.scene
+            cena.add(model2)
+            misturador = new THREE.AnimationMixer(model2);
+            //camara.lookAt(0, 0, 0);
+            model2.traverse(function (x) {
+                if (x.name === 'SupportJoint') {
+                    CircleJoint = x;
+                    let animOpenGB = THREE.AnimationClip.findByName(gltf.animations, 'SupportJointAction');
+                    move_CircleJoint = misturador.clipAction(animOpenGB);
+                }
+                if (x.name === 'LongArm') {
+                    LongArm = x;
+                    let animOpenGM = THREE.AnimationClip.findByName(gltf.animations, 'LongArmAction');
+                    move_LongArm = misturador.clipAction(animOpenGM);
+                }
+                if (x.name === 'AbajurJoint') {
+                    AbajurJoint = x;
+                    let animOpenPM = THREE.AnimationClip.findByName(gltf.animations, 'AbajurJointAction');
+                    move_AbajurJoint = misturador.clipAction(animOpenPM);
+                }
+                if (x.name === 'ShortArm') {
+                    ShortArm = x;
+                    let animOpenPM = THREE.AnimationClip.findByName(gltf.animations, 'ShortArmAction');
+                    move_ShortArm = misturador.clipAction(animOpenPM);
+                }
+                if (x.name === 'ArmToAbajurJoint') {
+                    ArmToAbajurJoint = x;
+                    let animOpenPM = THREE.AnimationClip.findByName(gltf.animations, 'ArmToAbajurJointAction');
+                    move_ArmToAbajurJoint = misturador.clipAction(animOpenPM);
+                }
+            })
+        })
+    }
 // Criar o Raycaster
+// Initialize Raycaster and Mouse Vector
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
+let selectedObject = null;  
 
+// Function to Update Mouse Position
 function renderRaycaster(evento) {
     let limites = evento.target.getBoundingClientRect();
     const height = limites.bottom - limites.top;
     const width = limites.right - limites.left;
 
+    // Calculate normalized device coordinates (NDC) for mouse
     mouse.x = ((evento.clientX - limites.left) / width) * 2 - 1;
     mouse.y = -((evento.clientY - limites.top) / height) * 2 + 1;
 
+    // Update raycaster with mouse position
+    raycaster.setFromCamera(mouse, camara);
 }
 
-
-// Atualizar a posição do rato
+// Add Mouse Move Event Listener
 window.addEventListener('mousemove', renderRaycaster, false);
 
+// Add Click Event Listener
 window.addEventListener('click', () => {
-    raycaster.setFromCamera(mouse, camara);
+    // Perform Raycaster Intersections
     const intersects = raycaster.intersectObjects(cena.children, true);
 
+    if (intersects.length === 0) {
+        return;
+    }
+
+    // Iterate over intersections
     for (let i = 0; i < intersects.length; i++) {
-        if (intersects[i].object.parent.name == "gaveta_baixo") {
-            playGavetaBaixo();
-        }
-        if (intersects[i].object.parent.name == "gaveta_meio") {
-            playGavetaMeio()
-        }
+        const intersectedParentName = intersects[i].object.parent ? intersects[i].object.parent.name : null;
 
-        if (intersects[i].object.parent.name == "gaveta_cima") {
-            playGavetaCima()
-        }
-
-        if (intersects[i].object.parent.name == "porta_direita") {
-            playPortaDireita()
-        }
-        if (intersects[i].object.parent.name == "porta_meio") {
-            playPortaMeio()
-        }
-        if (intersects[i].object.parent.name == "porta_esquerda") {
-            playPortaEsquerda()
+        // Call corresponding function based on the parent object's name
+        switch (intersectedParentName) {
+            case "SupportJoint":
+                MoveCircleJoint();
+                break;
+            case "LongArm":
+                MoveLongArm();
+                break;
+            case "AbajurJoint":
+                move_AbajurJoint();
+                break;
+            case "ShortArm":
+                MoveShortArm();
+                break;
+            case "ArmToAbajurJoint":
+                MoveArmToAbajurJoint();
+                break;
+            default:
         }
     }
 });
 
-function playGavetaBaixo() {
-    if (open_gaveta_baixo.paused == true) {
-        open_gaveta_baixo.paused = false;
-        open_gaveta_baixo.enabled = true;
-        open_gaveta_baixo.timeScale *= -1;
-    }
-    open_gaveta_baixo.setLoop(THREE.LoopOnce);
-    open_gaveta_baixo.play();
-    open_gaveta_baixo.clampWhenFinished = true;
-}
+//Configuração inicial
+let isDragging = false;
+let previousMousePosition = { x: 0, y: 0 };
+let activeAxis = null; // Armazena o eixo ativo (x ou y)
+const cameraTarget2 = new THREE.Vector3(0, 0, 0); // Define o ponto inicial de destino
 
-function playGavetaMeio() {
-    if (open_gaveta_meio.paused == true) {
-        open_gaveta_meio.paused = false;
-        open_gaveta_meio.enabled = true;
-        open_gaveta_meio.timeScale *= -1;
-    }
-    open_gaveta_meio.setLoop(THREE.LoopOnce);
-    open_gaveta_meio.play();
-    open_gaveta_meio.clampWhenFinished = true;
-}
+// Listener de eventos para começar a arrastar
+window.addEventListener('mousedown', (event) => {
+    isDragging = true;
+    previousMousePosition = { x: event.clientX, y: event.clientY };
+    activeAxis = null; // Reseta o eixo ativo ao iniciar um novo arraste
+});
 
-function playGavetaCima() {
-    if (open_gaveta_cima.paused == true) {
-        open_gaveta_cima.paused = false;
-        open_gaveta_cima.enabled = true;
-        open_gaveta_cima.timeScale *= -1;
-    }
-    open_gaveta_cima.setLoop(THREE.LoopOnce);
-    open_gaveta_cima.play();
-    open_gaveta_cima.clampWhenFinished = true;
-}
-//abrir gavetas
+window.addEventListener('mouseup', () => {
+    isDragging = false;
+    activeAxis = null; // Reseta o eixo ativo ao terminar o arraste
+});
 
-function playGavetas() {
-    playGavetaBaixo()
-    playGavetaMeio()
-    playGavetaCima()
-}
+// Listener para mover a câmera
+window.addEventListener('mousemove', (event) => {
+    if (!isDragging) return;
 
-function playPortaDireita() {
-    if (open_porta_direita.paused == true) {
-        open_porta_direita.paused = false;
-        open_porta_direita.enabled = true;
-        open_porta_direita.timeScale *= -1;
-    }
-    open_porta_direita.setLoop(THREE.LoopOnce);
-    open_porta_direita.play();
-    open_porta_direita.clampWhenFinished = true;
-}
+    const deltaX = event.clientX - previousMousePosition.x;
+    const deltaY = event.clientY - previousMousePosition.y;
 
-function playPortaMeio() {
-
-    if (open_porta_meio.paused == true) {
-        open_porta_meio.paused = false;
-        open_porta_meio.enabled = true;
-        open_porta_meio.timeScale *= -1;
-    }
-    open_porta_meio.setLoop(THREE.LoopOnce);
-    open_porta_meio.play();
-    open_porta_meio.clampWhenFinished = true;
-}
-
-function playPortaEsquerda() {
-    if (open_porta_esquerda.paused == true) {
-        open_porta_esquerda.paused = false;
-        open_porta_esquerda.enabled = true;
-        open_porta_esquerda.timeScale *= -1;
-    }
-    open_porta_esquerda.setLoop(THREE.LoopOnce);
-    open_porta_esquerda.play();
-    open_porta_esquerda.clampWhenFinished = true;
-}
-
-function playPortas() {
-    playPortaDireita()
-    playPortaMeio()
-    playPortaEsquerda()
-}
-
-
-let nodesToChange =
-    ['Aparador', 'gaveta_baixo_material', 'gaveta_meio_material',
-        'gaveta_cima_material', 'porta_esquerda_material', 'porta_meio_material',
-        'porta_direita_material'];
-
-function setInitialColor() {
-    nodesToChange.forEach(nodeName => {
-        const object = model.getObjectByName(nodeName, true);
-        if (object) {
-            object.traverse(child => {
-                if (child.isMesh) {
-                    child.material = wood_normal_material;
-                }
-            });
+    // Define o eixo ativo se ainda não foi definido
+    if (activeAxis === null) {
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            activeAxis = "horizontal"; // Movimento no eixo horizontal
+        } else {
+            activeAxis = "vertical"; // Movimento no eixo vertical
         }
-    });
-    render(); // Assuming you have a render function
+    }
+
+    // Ajusta o ponto de destino da câmera sutilmente
+    const moveSpeed = 0.01; // Velocidade de movimento (valor pequeno para ser sutil)
+    if (activeAxis === "horizontal") {
+        cameraTarget2.x += deltaX * moveSpeed; // Ajusta no eixo X
+        cameraTarget2.z += deltaX * moveSpeed; // Opcional: movimentação sutil no eixo Z
+    } else if (activeAxis === "vertical") {
+        cameraTarget2.y += deltaY * moveSpeed; // Ajusta no eixo Y
+    }
+
+    // Faz a câmera olhar para o novo ponto de destino
+    camara.lookAt(cameraTarget2);
+
+    // Atualiza a posição do mouse para o próximo movimento
+    previousMousePosition = { x: event.clientX, y: event.clientY };
+});
+
+function MoveCircleJoint() {
+    if (move_CircleJoint.paused == true) {
+        move_CircleJoint.paused = false;
+        move_CircleJoint.enabled = true;
+        move_CircleJoint.timeScale *= -1;
+    }
+    move_CircleJoint.setLoop(THREE.LoopOnce);
+    move_CircleJoint.play();
+    move_CircleJoint.clampWhenFinished = true;
 }
 
-let select_secretary_img = document.getElementById('select_secretary_img')
+function MoveLongArm() {
+    if (move_LongArm.paused == true) {
+        move_LongArm.paused = false;
+        move_LongArm.enabled = true;
+        move_LongArm.timeScale *= -1;
+    }
+    move_LongArm.setLoop(THREE.LoopOnce);
+    move_LongArm.play();
+    move_LongArm.clampWhenFinished = true;
+}
+
+function MoveAbajurJoint() {
+    if (move_AbajurJoint.paused == true) {
+        move_AbajurJoint.paused = false;
+        move_AbajurJoint.enabled = true;
+        move_AbajurJoint.timeScale *= -1;
+    }
+    move_AbajurJoint.setLoop(THREE.LoopOnce);
+    move_AbajurJoint.play();
+    move_AbajurJoint.clampWhenFinished = true;
+}
+
+function MoveShortArm() {
+    if (move_ShortArm.paused == true) {
+        move_ShortArm.paused = false;
+        move_ShortArm.enabled = true;
+        move_ShortArm.timeScale *= -1;
+    }
+    move_ShortArm.setLoop(THREE.LoopOnce);
+    move_ShortArm.play();
+    move_ShortArm.clampWhenFinished = true;
+}
+    
+function MoveArmToAbajurJoint() {
+    if (move_ArmToAbajurJoint.paused == true) {
+        move_ArmToAbajurJoint.paused = false;
+        move_ArmToAbajurJoint.enabled = true;
+        move_ArmToAbajurJoint.timeScale *= -1;
+    }
+    move_ArmToAbajurJoint.setLoop(THREE.LoopOnce);
+    move_ArmToAbajurJoint.play();
+    move_ArmToAbajurJoint.clampWhenFinished = true;
+}
+
+
 function changeColor() {
+    // Get the selected color from the dropdown
     const colorSelector = document.getElementById('colorSelector');
     const selectedColor = colorSelector.value;
-    switch (selectedColor) {
-        case 'normal':
-            console.log(model);
-            nodesToChange.forEach(nodeName => {
-                const object = model.getObjectByName(nodeName, true); // Recursive search
-                if (object) {
-                    object.traverse(child => {
-                        if (child.isMesh) {
-                            child.material = wood_normal_material;
-                            select_secretary_img.src = "./assets/product-page/desk.png";
-                        }
-                    });
-                }
-            });
-            break;
-        case 'black':
-            nodesToChange.forEach(nodeName => {
-                const object = model.getObjectByName(nodeName, true); // Recursive search
-                if (object) {
-                    object.traverse(child => {
-                        if (child.isMesh) {
-                            child.material = wood_black_material;
-                            select_secretary_img.src = "./assets/product-page/desk_black.png";
-                        }
-                    });
-                }
-            });
-            break;
-        case 'gray':
-            nodesToChange.forEach(nodeName => {
-                const object = model.getObjectByName(nodeName, true); // Recursive search
-                if (object) {
-                    object.traverse(child => {
-                        if (child.isMesh) {
-                            child.material = wood_gray_material;
-                            select_secretary_img.src = "./assets/product-page/desk_gray.png";
-                        }
-                    });
-                }
-            });
-            break;
-        case 'blue':
-            nodesToChange.forEach(nodeName => {
-                const object = model.getObjectByName(nodeName, true); // Recursive search
-                if (object) {
-                    object.traverse(child => {
-                        if (child.isMesh) {
-                            child.material = wood_blue_material;
-                            select_secretary_img.src = "./assets/product-page/desk_blue.png";
-                        }
-                    });
-                }
-            });
-            break;
-        case 'red':
-            nodesToChange.forEach(nodeName => {
-                const object = model.getObjectByName(nodeName, true); // Recursive search
-                if (object) {
-                    object.traverse(child => {
-                        if (child.isMesh) {
-                            child.material = wood_red_material;
-                            select_secretary_img.src = "./assets/product-page/desk_red.png";
-                        }
-                    });
-                }
-            });
-            break;
-        case 'green':
-            nodesToChange.forEach(nodeName => {
-                const object = model.getObjectByName(nodeName, true); // Recursive search
-                if (object) {
-                    object.traverse(child => {
-                        if (child.isMesh) {
-                            child.material = wood_green_material;
-                            select_secretary_img.src = "./assets/product-page/desk_green.png";
-                        }
-                    });
-                }
-            });
-            break;
-        default:
-            break;
+
+    // Get the Abajur object by name
+    let abajur = model.getObjectByName('Abajur'); // 'Abajur' should be the actual object name
+
+    // Ensure Abajur exists
+    if (!abajur) {
+        console.error('Abajur object not found in the model.');
+        return;
     }
-    render()
+
+    // Define materials for each color
+    var amethist = '#9b59b6';
+    var emerald = '#2ecc71'
+    var blue = '#3498db'
+    var carrot = '#e67e22'
+    var sunflower = '#f1c40f'
+    var black = '#34495e'
+    const materials = {
+        normal: new THREE.MeshStandardMaterial({ color: amethist }), // Replace with your desired color/material
+        amethist: new THREE.MeshStandardMaterial({ color: emerald }),
+        emerald: new THREE.MeshStandardMaterial({ color: blue }),
+        blue: new THREE.MeshStandardMaterial({ color: carrot }),
+        carrot: new THREE.MeshStandardMaterial({ color: sunflower }),
+        sunflower: new THREE.MeshStandardMaterial({ color: black }),
+    };
+
+    // Assign the material based on the selected color
+    if (materials[selectedColor]) {
+        console.log('entrei')
+        abajur.material = materials[selectedColor];
+    } else {
+        console.warn('Selected color not recognized. No material change applied.');
+    }
+
+    render();
 }
 
+function lightup(){
+    clickCount3 += 1;
+    let spot,spot2,point,point2;
+
+    if(model){
+        spot = model.getObjectByName('Spot');
+        point = model.getObjectByName('Point');
+    }
+    
+    if(model2){
+        spot2 = model2.getObjectByName('Spot');
+        point2 = model2.getObjectByName('Point');
+    }
+
+    switch (clickCount3) {
+        case 1:
+            if(model2){
+                console.log('entrei no if model2')
+                spot2.intensity = 1000;
+                point2.intensity = 50;
+            }
+            spot.intensity = 500;
+            point.intensity = 0.3;
+            break;
+        case 2:
+            if(model2){
+                spot2.intensity = 0;
+                point2.intensity = 0;
+            }
+            point.intensity = 0;
+            spot.intensity = 0;
+            clickCount3 = 0;
+            break;
+    }
+}
 
 
 function changeSize() {
     const sizeSelector = document.getElementById('sizeSelector');
     const selectedSize = sizeSelector.value;
+    if(model){
+        sizeSelector.disabled = true;
+    }
+    if(model2){
+        sizeSelector.disabled = false;
+    }
     switch (selectedSize) {
         case 'size_M':
-            model.scale.set(1, 1, 1);
+            console.log('teste')
+            model2.scale.set(1, 1, 1);
             break;
         case 'size_L':
-            model.scale.set(1.1, 1, 1);
+            model2.scale.set(1.2, 1.2, 1);
             break;
         case 'size_XL':
-            model.scale.set(1.2, 1, 1);
+            model2.scale.set(1.4, 1.4, 1);
             break;
         default:
-            model.scale.set(1, 1, 1);
+            model2.scale.set(1, 1, 1);
             break;
     }
 }
 
 function move_model_y() {
+    if(model2){
+        document.getElementById('move_model_y').disabled = true;
+    }
     const rotationValue = THREE.MathUtils.degToRad(parseFloat(document.getElementById('move_model_y').value));
     model.rotation.y = rotationValue;
     camara.lookAt(0, 0, 0);
@@ -443,6 +429,9 @@ function move_model_y() {
 }
 
 function move_model_x() {
+    if(model2){
+        document.getElementById('move_model_x').disabled = true;
+    }
     const rotationValue = THREE.MathUtils.degToRad(parseFloat(document.getElementById('move_model_x').value));
     model.rotation.x = rotationValue;
     camara.lookAt(0, 0, 0);
@@ -450,6 +439,9 @@ function move_model_x() {
 }
 
 function move_model_z() {
+    if(model2){
+        document.getElementById('move_model_z').disabled = true;
+    }
     const rotationValue = THREE.MathUtils.degToRad(parseFloat(document.getElementById('move_model_z').value));
     model.rotation.z = rotationValue;
     camara.lookAt(0, 0, 0);
@@ -459,7 +451,6 @@ function move_model_z() {
 let isAnimatingCamera;
 var cameraTarget = new THREE.Vector3(0, 0, 0);
 var lerpValue = 0.05;
-let clickCount = 0;
 
 function animateCamera() {
     if (!isAnimatingCamera) return;
@@ -471,26 +462,17 @@ function animateCamera() {
         isAnimatingCamera = false;
     }
 }
+let clickCount = 0;
 function change_camera() {
     clickCount += 1;
     switch (clickCount) {
         case 1:
-            cameraTarget.set(3.40, 0.672, 0.000);
+            cameraTarget.set(0.009, 3, 3.40);
             isAnimatingCamera = true;
             animateCamera();
             break;
         case 2:
-            cameraTarget.set(0.070, 0.672, -3.40);
-            isAnimatingCamera = true;
-            animateCamera();
-            break;
-        case 3:
-            cameraTarget.set(-3.40, 0.672, 0.000);
-            isAnimatingCamera = true;
-            animateCamera();
-            break;
-        case 4:
-            cameraTarget.set(0.009, 0.672, 3.40);
+            cameraTarget.set(3.40, 3, 0.000);
             isAnimatingCamera = true;
             animateCamera();
             clickCount = 0;
@@ -498,28 +480,20 @@ function change_camera() {
     }
 }
 
-function removeObjects() {
-    for (let i = 0; i < ocultos_aux.length; i++) {
-        ocultos_aux[i].visible = ocultos_boolean;
-    }
-    if (ocultos_boolean) {
-        ocultos_boolean = false;
-    }
-    else {
-        ocultos_boolean = true;
-    }
-
-}
 
 document.getElementById('colorSelector').addEventListener('change', changeColor);
 document.getElementById('sizeSelector').addEventListener('change', changeSize);
 document.getElementById('move_model_y').addEventListener('input', move_model_y);
 document.getElementById('move_model_x').addEventListener('input', move_model_x);
 document.getElementById('move_model_z').addEventListener('input', move_model_z);
+document.getElementById('btn_light').addEventListener('click',lightup);
 document.getElementById('btn_change_camera').addEventListener('click', change_camera);
-document.getElementById('btn_remove_objects').addEventListener('click',removeObjects)
-document.getElementById("btn_open_drawers").addEventListener('click', playGavetas);
-document.getElementById("btn_open_doors").addEventListener('click', playPortas);
+document.getElementById("btn_move_circle_joint").addEventListener('click', MoveCircleJoint);
+document.getElementById("btn_move_long_arm").addEventListener('click', MoveLongArm);
+document.getElementById("btn_move_abajur_joint").addEventListener('click', MoveAbajurJoint);
+document.getElementById("btn_move_short_arm").addEventListener('click',MoveShortArm)
+document.getElementById("btn_move_arm_abajur_joint").addEventListener('click',MoveArmToAbajurJoint)
+document.getElementById("btn_remove_scenario").addEventListener('click', removeScenario);
 let delta = 0;
 let relogio = new THREE.Clock();
 let latencia_minima = 1 / 60;

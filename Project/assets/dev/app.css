@@ -246,6 +246,21 @@ header #shortcuts_nav ul {
   height: 80px;
 }
 
+.product-page-container .remove-scenario{
+  background-color: #D9D9D9;
+  border: none;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  width: 50%;
+  height: 20px;
+}
+
+.product-page-container .remove-scenario:hover {
+  background-color: var(--red2);
+  color: var(--white);
+}
+
 .product-page-container .interaction button:hover {
   background-color: var(--red2);
   color: var(--white);
@@ -298,15 +313,6 @@ header #shortcuts_nav ul {
 
 .product-page-container .desk-info .change-color{
   position: relative;
-}
-
-.product-page-container .desk-info .select-secretary{
-  position: absolute;
-  top: 15px;
-  left: 10px;
-  width: 45px;
-  height: 32px;
-  z-index: 2;
 }
 
 .product-page-container .range-container{

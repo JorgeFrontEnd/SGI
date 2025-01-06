@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="./assets/dev/app.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <title>Secretária vintage</title>
+    <title>Abajur</title>
 </head>
 
 <body>
@@ -16,6 +16,9 @@
                 <div class="col">
                     <div class="center">
                         <canvas id="display_content"></canvas>
+                    </div>
+                    <div class="center">
+                        <button id="btn_remove_scenario" class="remove-scenario">remover cenario</button>
                     </div>
                     <div class="range-container center">
                         <div class="range center">
@@ -36,26 +39,19 @@
                 <div class="col">
                     <div class="desk-info">
                         <div class="title">
-                            Secretária Vintage
+                            Abajur
                         </div>
                         <div class="col description">
-                            • Em MDF folha de carvalho, acabamento com verniz nitrocelulósico
-                            <br>
-                            • Pés afunilados e puxadores em freixo maciço, acabamento com verniz nitrocelulósico
-                            <br>
-                            • 1 compartimento com 3 portas
-                            <br>
-                            • 1 compartimento com 3 gavetas, ranhuras em aço
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Explicabo quidem, quibusdam soluta modi animi ad qui accusamus voluptatem. Quam voluptate sed sit odio modi nam repellat ipsam. Est, doloremque cum.
                         </div>
                         <div class="change-color">
-                            <img id="select_secretary_img" class="select-secretary" src="assets/product-page/desk.png">
                             <select id="colorSelector" name="colors">
-                                <option value="normal">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Normal</option>
-                                <option value="black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Preto</option>
-                                <option value="gray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cinzento</option>
-                                <option value="blue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Azul</option>
-                                <option value="red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Vermelho</option>
-                                <option value="green">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verde</option>
+                                <option value="normal">Normal</option>
+                                <option value="amethist">Amethist</option>
+                                <option value="emerald">Emerald</option>
+                                <option value="blue">Blue</option>
+                                <option value="carrot">Carrot</option>
+                                <option value="sunflower">Sunflower</option>
                             </select>
 
                         </div>
@@ -70,13 +66,22 @@
                     </div>
                     <div class="interaction">
                         <div>
-                            <button id="btn_open_drawers">Abrir/Fechar gavetas</button>
+                            <button id="btn_move_circle_joint">MoverSupportJoint</button>
                         </div>
                         <div>
-                            <button id="btn_open_doors">Abrir/Fechar Portas</button>
+                            <button id="btn_move_long_arm">MoveLongArm</button>
                         </div>
                         <div>
-                            <button id="btn_remove_objects">Ocultar/Expor objetos</button>
+                            <button id='btn_move_abajur_joint'>MoveAbajurJoint</button>
+                        </div>
+                        <div>
+                            <button id="btn_move_short_arm">MoveShortArm</button>
+                        </div>
+                        <div>
+                            <button id="btn_move_arm_abajur_joint">ArmToAbajurJoint</button>
+                        </div>
+                        <div>
+                            <button id="btn_light">Acender/Apagar luz</button>
                         </div>
                         <div>
                             <button id="btn_change_camera">Mudar prespectiva da camara</button>
